@@ -1,0 +1,10 @@
+12:08:35 **** Incremental Build of configuration Release for project Server ****
+make all 
+Building target: Server
+Invoking: Cross G++ Linker
+g++ -L"/home/alex/c+dev/workspace/linux-net/SocketLib/Release" -o "Server"  ./source/server.o   -lSocketLib
+Finished building target: Server
+ 
+
+12:08:35 Build Finished (took 161ms)
+

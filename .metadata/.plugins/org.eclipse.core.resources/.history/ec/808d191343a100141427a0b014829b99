@@ -1,0 +1,19 @@
+#ifndef TCPSERVER_H_
+#define TCPSERVER_H_
+
+#include "TcpSocket.h"
+
+typedef void (*ServerFun)(TcpSocket &sock);
+
+class TcpServer
+{
+    ServerFun m_function;
+
+public:
+    TcpServer(ServerFun function);
+
+    int run(int port);
+};
+
+
+#endif

@@ -1,0 +1,6 @@
+12:33:08 **** Incremental Build of configuration Release for project SocketLib ****
+make all 
+make: Nothing to be done for `all'.
+12:33:08 **** Incremental Build of configuration Release for project Client ****
+make all 
+make: Nothing to be done for `all'.

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Client</name>
+	<name>SocketLib</name>
 	<comment></comment>
 	<projects>
-		<project>SocketLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

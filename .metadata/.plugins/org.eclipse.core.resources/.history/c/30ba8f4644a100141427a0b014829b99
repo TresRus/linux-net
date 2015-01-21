@@ -8,16 +8,14 @@
 
 const int MAXLINE = 128;
 
-using namespace linuxnet::tcp;
-
-void client_fun(TcpSocket &sock)
+void client_fun(linuxnet::tcp::TcpSocket &sock)
 {
     char line[MAXLINE] = "";
     ssize_t readed;
 
     std::cin >> line;
 
-    while(!strcmp(line, "q"))
+    while(line != "q")
     {
         strcat(line, "\n");
 

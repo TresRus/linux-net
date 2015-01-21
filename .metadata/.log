@@ -1,0 +1,16 @@
+!SESSION 2015-01-21 12:50:33.141 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.7.0_71
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-01-21 12:55:09.978
+!MESSAGE Indexed 'Server' (1 sources, 122 headers) in 2.86 sec: 9,679 declarations; 15,740 references; 0 unresolved inclusions; 0 syntax errors; 2 unresolved names (0.0079%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-01-21 12:55:11.266
+!MESSAGE Indexed 'SocketLib' (3 sources, 157 headers) in 1.28 sec: 8,615 declarations; 11,296 references; 0 unresolved inclusions; 0 syntax errors; 2 unresolved names (0.01%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2015-01-21 12:55:12.877
+!MESSAGE Indexed 'Client' (1 sources, 128 headers) in 1.6 sec: 10,131 declarations; 16,251 references; 0 unresolved inclusions; 0 syntax errors; 2 unresolved names (0.0076%)

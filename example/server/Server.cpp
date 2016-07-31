@@ -8,12 +8,12 @@ const int MAXLINE = 128;
 
 using namespace linuxnet::tcp;
 
-void server_fun(TcpSocket &sock)
+void server_fun(Socket &sock)
 {
     int readed;
     char line[MAXLINE];
 
-    while( (readed = sock.read_till_byte('\n', (byte *)line, sizeof(line))) )
+    while ( (readed = sock.read_till_byte('\n', (byte *)line, sizeof(line))) )
     {
         sock.write((byte *)line, strlen(line));
     }
@@ -21,9 +21,9 @@ void server_fun(TcpSocket &sock)
 
 int main(int argc, char **argv)
 {
-    TcpServer server(server_fun);
+    Server server(server_fun);
 
-    if(argc != 2)
+    if (argc != 2)
     {
         std::cout << "usage: server <Port>" << std::endl;
         return 1;
@@ -31,3 +31,4 @@ int main(int argc, char **argv)
 
     return server.run(atoi(argv[1]));
 }
+

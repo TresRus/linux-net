@@ -1,5 +1,5 @@
-#ifndef TCPCLIENT_H_
-#define TCPCLIENT_H_
+#ifndef TCP_CLIENT_H_
+#define TCP_CLIENT_H_
 
 #include "TcpSocket.h"
 #include <string>
@@ -7,20 +7,26 @@
 namespace linuxnet {
 namespace tcp {
 
-typedef void (*ClientFun)(TcpSocket &sock);
+////////////////////////////////////////////////////////////
+// class Client
 
-class TcpClient
+class Client
 {
-    ClientFun m_function;
-
 public:
-    TcpClient(ClientFun function);
+    typedef void (function_type)(Socket &sock);
+
+    Client(function_type *function);
 
     int run(const std::string &addres, int port);
     int run_background(const std::string &addres, int port);
+
+private:
+    function_type *m_function;
+
 };
 
-}
-} 
+} // namespace tcp
+} // namespace linuxnet
 
-#endif
+#endif // TCP_CLIENT_H_
+

@@ -1,5 +1,5 @@
-#ifndef TCPSOCKET_H_
-#define TCPSOCKET_H_
+#ifndef TCP_SOCKET_H_
+#define TCP_SOCKET_H_
 
 #include <string>
 #include "SocketTypes.h"
@@ -7,26 +7,14 @@
 namespace linuxnet {
 namespace tcp {
 
-const uint TCP_READ_BUFFER_SIZE = 1024;
+////////////////////////////////////////////////////////////
+// class Socket
 
-class TcpSocket
+class Socket
 {
-private:
-    int m_fd;
-    bool m_open;
-
-    int port;
-    std::string address;
-
-    void localAddrPort();
-    void remoteAddrPort(int fd, std::string &addr, int &p);
-
-    TcpSocket(int fd, const std::string &addr, int p);
-
 public:
-    TcpSocket();
-
-    ~TcpSocket();
+    Socket();
+    ~Socket();
 
     bool bind(const std::string &ip, int port);
     bool bind(const std::string &ip);
@@ -34,7 +22,7 @@ public:
 
     bool connect(const std::string &ip, int port);
     bool listen();
-    TcpSocket *accept();
+    Socket *accept();
 
     ssize_t write(const byte *data, size_t size);
     ssize_t read (byte *data, size_t size);
@@ -44,9 +32,22 @@ public:
 
     std::string getAddress();
     int getPort();
+
+private:
+    int m_fd;
+    bool m_open;
+    std::string m_address;
+    int m_port;
+
+    void localAddrPort();
+    void remoteAddrPort(int fd, std::string &address, int &port);
+
+    Socket(int fd, const std::string &address, int port);
+
 };
 
-}
-}
+} // namespace tcp
+} // namespace linuxnet
 
-#endif /* TCPSOCKET_H_ */
+#endif // TCP_SOCKET_H_
+

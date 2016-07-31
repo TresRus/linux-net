@@ -1,5 +1,5 @@
-#ifndef SOCKETINCLUDE_H_
-#define SOCKETINCLUDE_H_
+#ifndef SOCKET_INCLUDE_H_
+#define SOCKET_INCLUDE_H_
 
 #include "SocketTypes.h"
 
@@ -17,4 +17,4 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#endif /* SOCKETINCLUDE_H_ */
+#endif // SOCKET_INCLUDE_H_

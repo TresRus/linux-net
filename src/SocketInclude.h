@@ -1,7 +1,7 @@
 #ifndef SOCKETINCLUDE_H_
 #define SOCKETINCLUDE_H_
 
-#include "include/SocketTypes.h"
+#include "SocketTypes.h"
 
 #include <stdlib.h>
 #include <sys/socket.h>

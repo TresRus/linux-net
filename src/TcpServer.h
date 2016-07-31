@@ -1,24 +1,30 @@
-#ifndef TCPSERVER_H_
-#define TCPSERVER_H_
+#ifndef TCP_SERVER_H_
+#define TCP_SERVER_H_
 
 #include "TcpSocket.h"
 
 namespace linuxnet {
 namespace tcp {
 
-typedef void (*ServerFun)(TcpSocket &sock);
+////////////////////////////////////////////////////////////
+// class Server
 
-class TcpServer
+class Server
 {
-    ServerFun m_function;
-
 public:
-    TcpServer(ServerFun function);
+    typedef void (function_type)(Socket &sock);
+
+    Server(function_type *function);
 
     int run(int port);
+
+private:
+    function_type *m_function;
+
 };
 
-}
-}
+} // namespace tcp
+} // namespace linuxnet
 
-#endif
+#endif // TCP_SERVER_H_
+

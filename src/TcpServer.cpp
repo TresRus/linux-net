@@ -1,5 +1,7 @@
 #include "TcpServer.h"
+#include "TcpPassive.h"
 #include "SocketInclude.h"
+#include <iostream>
 
 namespace linuxnet {
 namespace tcp {
@@ -11,7 +13,7 @@ void signal_child_handler(int signo)
     int stat;
 
     while ((pid = waitpid(-1, &stat, WNOHANG)) > 0)
-        printf("Server fork %d terminate\n", pid);
+        std::cout << "Client fork " << pid << " terminate" << std::endl;
 
     return;
 }
@@ -21,35 +23,31 @@ void signal_child_handler(int signo)
 ////////////////////////////////////////////////////////////
 // class Server
 
-Server::Server(Server::function_type function) :
-    m_function(function)
+Server::Server(Server::function_type function_) :
+    m_function(function_)
 {
 }
 
-int Server::run(int port)
+int Server::run(int port_)
 {
-    Socket sock;
     signal(SIGCHLD, server::signal_child_handler);
 
-    if (!sock.bind(port))
-            return 1;
+    socket::tcp::PassiveSP sock = socket::tcp::Passive::create(port_);
 
-    if (!sock.listen())
+    if (sock == nullptr)
         return 1;
 
-    printf("Server at %s:%d\n",
-            sock.getAddress().c_str(), sock.getPort());
+    std::cout << "Server" << std::endl;
 
     for (;;)
     {
-        printf("Wait connection\n");
-        Socket *connected = sock.accept();
+        std::cout << "Wait connection" << std::endl;
+        socket::tcp::ActiveSP connected = sock->accept();
 
-        if (connected == NULL)
+        if (connected == nullptr)
             return 1;
 
-        printf("Connected %s:%d\n",
-               connected->getAddress().c_str(), connected->getPort());
+        std::cout << "Connected" << std::endl;
 
         int fr = fork();
         if (fr == -1)
@@ -59,14 +57,12 @@ int Server::run(int port)
         }
         if (fr == 0)
         {
-            sock.close();
+            sock.reset();
 
-            m_function(*connected);
+            m_function(connected);
 
-            delete connected;
             return 0;
         }
-        delete connected;
     }
     return 0;
 }

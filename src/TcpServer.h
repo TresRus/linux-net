@@ -1,7 +1,7 @@
 #ifndef TCP_SERVER_H_
 #define TCP_SERVER_H_
 
-#include "TcpSocket.h"
+#include "TcpActive.h"
 
 namespace linuxnet {
 namespace tcp {
@@ -12,11 +12,11 @@ namespace tcp {
 class Server
 {
 public:
-    typedef void (function_type)(Socket &sock);
+    typedef void (function_type)(socket::tcp::ActiveSP);
 
-    Server(function_type *function);
+    Server(function_type *function_);
 
-    int run(int port);
+    int run(int port_);
 
 private:
     function_type *m_function;

@@ -9,6 +9,7 @@ set (LINUX_NET_H
     ${LINUX_NET_IFACE}
     SocketInclude.h
     Fd.h
+    TcpBase.h
     )
 
 set (LINUX_NET_CPP
@@ -16,6 +17,7 @@ set (LINUX_NET_CPP
     TcpServer.cpp
     TcpSocket.cpp
     Fd.cpp
+    TcpBase.cpp
     )
 
 add_library (linuxnet SHARED ${LINUX_NET_CPP})

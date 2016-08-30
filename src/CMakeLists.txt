@@ -11,6 +11,7 @@ set (LINUX_NET_H
     Fd.h
     TcpBase.h
     TcpActive.h
+    TcpPassive.h
     )
 
 set (LINUX_NET_CPP
@@ -20,6 +21,7 @@ set (LINUX_NET_CPP
     Fd.cpp
     TcpBase.cpp
     TcpActive.cpp
+    TcpPassive.cpp
     )
 
 add_library (linuxnet SHARED ${LINUX_NET_CPP})

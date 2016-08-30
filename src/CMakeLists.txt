@@ -2,7 +2,8 @@ set (LINUX_NET_IFACE
     SocketTypes.h
     TcpClient.h
     TcpServer.h
-    TcpSocket.h
+    TcpActive.h
+    TcpPassive.h
     )
 
 set (LINUX_NET_H
@@ -10,14 +11,11 @@ set (LINUX_NET_H
     SocketInclude.h
     Fd.h
     TcpBase.h
-    TcpActive.h
-    TcpPassive.h
     )
 
 set (LINUX_NET_CPP
     TcpClient.cpp
     TcpServer.cpp
-    TcpSocket.cpp
     Fd.cpp
     TcpBase.cpp
     TcpActive.cpp

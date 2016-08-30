@@ -1,3 +1,4 @@
+#include "TcpActive.h"
 #include "TcpClient.h"
 #include "SocketTypes.h"
 #include <iostream>
@@ -8,9 +9,9 @@
 
 const int MAXLINE = 128;
 
-using namespace linuxnet::tcp;
+using namespace linuxnet;
 
-void client_fun(Socket &sock)
+void client_fun(socket::tcp::ActiveSP sock)
 {
     char line[MAXLINE] = "";
     ssize_t readed;
@@ -21,9 +22,9 @@ void client_fun(Socket &sock)
     {
         strcat(line, "\n");
 
-        sock.write((byte *)line, strlen(line));
+        sock->write((byte *)line, strlen(line));
 
-        if ( (readed = sock.read_till_byte('\n', (byte *)line, sizeof(line))) )
+        if ( (readed = sock->readTillByte('\n', (byte *)line, sizeof(line))) )
         {
             line[readed] = 0;
             std::cout << readed << std::endl;
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    Client client(client_fun);
+    tcp::Client client(client_fun);
 
     client.run(argv[1], atoi(argv[2]));
 }

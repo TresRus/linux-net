@@ -1,7 +1,7 @@
 #ifndef TCP_CLIENT_H_
 #define TCP_CLIENT_H_
 
-#include "TcpSocket.h"
+#include "TcpActive.h"
 #include <string>
 
 namespace linuxnet {
@@ -13,12 +13,12 @@ namespace tcp {
 class Client
 {
 public:
-    typedef void (function_type)(Socket &sock);
+    typedef void (function_type)(socket::tcp::ActiveSP);
 
-    Client(function_type *function);
+    Client(function_type *function_);
 
-    int run(const std::string &addres, int port);
-    int run_background(const std::string &addres, int port);
+    int run(const std::string &addr_, int port_);
+    int run_background(const std::string &addr_, int port_);
 
 private:
     function_type *m_function;

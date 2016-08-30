@@ -1,5 +1,6 @@
 #include "TcpClient.h"
 #include "SocketInclude.h"
+#include <iostream>
 
 namespace linuxnet {
 namespace tcp {
@@ -11,7 +12,7 @@ void signal_child_handler(int signo)
     int stat;
 
     while ((pid = waitpid(-1, &stat, WNOHANG)) > 0)
-        printf("Client fork %d terminate\n", pid);
+        std::cout << "Client fork " << pid << " terminate" << std::endl;
 
     return;
 }
@@ -21,35 +22,37 @@ void signal_child_handler(int signo)
 ////////////////////////////////////////////////////////////
 // class Client
 
-Client::Client(Client::function_type *function) :
-    m_function(function)
+Client::Client(Client::function_type *function_) :
+    m_function(function_)
 {
 }
 
-int Client::run(const std::string &addres, int port)
+int Client::run(const std::string &addr_, int port_)
 {
-    Socket sock;
+    socket::tcp::ActiveSP sock =
+        socket::tcp::Active::create(addr_, port_);
 
-    sock.connect(addres, port);
+    if (sock == nullptr)
+        return 1;
 
-    printf("Client at %s:%d\n",
-        sock.getAddress().c_str(), sock.getPort());
+    std::cout << "Client" << std::endl;
 
     m_function(sock);
 
     return 0;
 }
 
-int Client::run_background(const std::string &addres, int port)
+int Client::run_background(const std::string &addr_, int port_)
 {
-    Socket sock;
-
     signal(SIGCHLD, client::signal_child_handler);
 
-    sock.connect(addres, port);
+    socket::tcp::ActiveSP sock =
+        socket::tcp::Active::create(addr_, port_);
+    
+    if (sock == nullptr)
+        return 1;
 
-    printf("Background client at %s:%d\n",
-        sock.getAddress().c_str(), sock.getPort());
+    std::cout << "Background client" << std::endl;
 
     int fr = fork();
     if (fr == -1)

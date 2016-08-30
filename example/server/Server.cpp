@@ -1,3 +1,4 @@
+#include "TcpActive.h"
 #include "TcpServer.h"
 #include <iostream>
 #include <string.h>
@@ -6,22 +7,22 @@
 
 const int MAXLINE = 128;
 
-using namespace linuxnet::tcp;
+using namespace linuxnet;
 
-void server_fun(Socket &sock)
+void server_fun(socket::tcp::ActiveSP sock)
 {
     int readed;
     char line[MAXLINE];
 
-    while ( (readed = sock.read_till_byte('\n', (byte *)line, sizeof(line))) )
+    while ( (readed = sock->readTillByte('\n', (byte *)line, sizeof(line))) )
     {
-        sock.write((byte *)line, strlen(line));
+        sock->write((byte *)line, strlen(line));
     }
 }
 
 int main(int argc, char **argv)
 {
-    Server server(server_fun);
+    tcp::Server server(server_fun);
 
     if (argc != 2)
     {
